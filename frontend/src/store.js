@@ -2,35 +2,55 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import {
+  productCreateReducer,
+  productDeleteReducer,
+  productDetailsReducer,
   productListReducer,
-  productDetailsReducer
+  productReviewCreateReducer,
+  productUpdateReducer
 } from './reducers/productReducers.js'
 import { cartReducer } from './reducers/cartReducers.js'
 import {
+  userDeleteReducer,
+  userDetailsReducer,
+  userListReducer,
   userLoginReducer,
   userRegisterReducer,
-  userDetailsReducer,
-  userUpdateProfileReducer
+  userUpdateProfileReducer,
+  userUpdateReducer
 } from './reducers/userReducers.js'
 import {
   orderCreateReducer,
+  orderDeliverReducer,
   orderDetailsReducer,
+  orderListReducer,
   orderListMyReducer,
-  orderPayReducer
+  orderPayReducer,
+  orderUpdateReducer
 } from './reducers/orderReducers.js'
 
 const reducer = combineReducers({
-  productList: productListReducer,
-  productDetails: productDetailsReducer,
   cart: cartReducer,
+  orderCreate: orderCreateReducer,
+  orderDeliver: orderDeliverReducer,
+  orderDetails: orderDetailsReducer,
+  orderList: orderListReducer,
+  orderListMy: orderListMyReducer,
+  orderPay: orderPayReducer,
+  orderUpdate: orderUpdateReducer,
+  productDelete: productDeleteReducer,
+  productDetails: productDetailsReducer,
+  productList: productListReducer,
+  productCreate: productCreateReducer,
+  productReviewCreate: productReviewCreateReducer,
+  productUpdate: productUpdateReducer,
+  userDelete: userDeleteReducer,
+  userDetails: userDetailsReducer,
+  userList: userListReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  userDetails: userDetailsReducer,
-  userUpdateProfile: userUpdateProfileReducer,
-  orderCreate: orderCreateReducer,
-  orderDetails: orderDetailsReducer,
-  orderPay: orderPayReducer,
-  orderListMy: orderListMyReducer
+  userUpdate: userUpdateReducer,
+  userUpdateProfile: userUpdateProfileReducer
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems') 
@@ -55,6 +75,10 @@ const initialState = {
 
 const middleware = [thunk]
 
-const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
+const store = createStore(
+  reducer,
+  initialState,
+  composeWithDevTools(applyMiddleware(...middleware))
+)
 
 export default store
